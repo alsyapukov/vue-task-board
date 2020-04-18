@@ -11,6 +11,12 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: () => import('@/pages/Main')
+    },
+    {
+      path: '/edit/:id',
+      name: 'Edit',
+      props: true,
+      component: () => import('@/pages/Edit')
     }
   ]
 })

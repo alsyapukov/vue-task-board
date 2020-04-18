@@ -1,7 +1,7 @@
 <template>
   <div class="textbox">
     <p class="textbox__title" v-if="title">{{ title }}</p>
-    <input class="textbox__inner" :type="type" v-model.lazy="value" placeholder="Input text" />
+    <input class="textbox__inner" :type="type" :name="id" :id="id" v-model="value" placeholder="Input text" />
   </div>
 </template>
 
@@ -15,6 +15,9 @@ export default {
     type: {
       type: String,
       default: "text"
+    },
+    id: {
+      type: String
     }
   },
   data() {

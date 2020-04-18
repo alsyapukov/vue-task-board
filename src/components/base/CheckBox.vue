@@ -4,17 +4,22 @@
       class="checkbox__input"
       type="checkbox"
       v-model="isChecked"
+      :value="isChecked"
+      :name="id"
+      :id="id"
+      :disabled="disabled"
+      @change="valueChange(isChecked)"
     />
-    <label class="checkbox__text">{{ title }}</label>
+    <label :for="id" class="checkbox__view" />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    title: {
+    id: {
       type: String,
-      default: ""
+      default: "checkbox"
     },
     disabled: {
       type: Boolean,
@@ -27,19 +32,11 @@ export default {
     };
   },
   mounted() {
-    if(this.$attrs.value) {
+    if (this.$attrs.value) {
       this.isChecked = true;
     } else {
       this.isChecked = false;
     }
-  },
-  watch: {
-    '$attrs.value'(val) {
-      this.isChecked = val;
-    },
-    isChecked(val) {
-      this.valueChange(val);
-    },
   },
   methods: {
     valueChange(val) {
@@ -51,15 +48,23 @@ export default {
 
 <style lang="scss" scoped>
 .checkbox {
-  display: flex;
-  align-items: center;
-  
+  width: 100%;
+  height: 100%;
+
   &__input {
-    width: 16px;
-    height: 16px;
+    display: none;
+    &:not(disabled),
+    &:checked + .checkbox__view {
+      background-color: #0fc766;
+    }
   }
-  &__text {
-    margin-left: 10px;
+
+  &__view {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: #ff2842;
   }
 }
 </style>
