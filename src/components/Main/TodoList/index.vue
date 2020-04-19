@@ -44,6 +44,9 @@ export default {
   },
   mounted() {
     this.todoList = JSON.parse(this.$localStorage.get("todoList"));
+    if(!this.todoList) {
+      this.todoList = []
+    }
     this.noSortList = [...this.noSortList, ...this.todoList];
 
     if(this.todoList.length > 0)
@@ -60,25 +63,13 @@ export default {
           : prev.title > next.title 
             ? 1 
             : 0;
-      })
-      if(this.todoList[0] != this.noSortList[0]) {
-        this.todoList.reverse();
-      }
+      }).reverse();
       this.addToLocalStorage();
     },
     addTodo() {
       this.todoList.push(simpleTodo);
       this.addToLocalStorage();
-    },
-    // removeTodo(i) {
-    //   this.$delete(this.todoList, i);
-    //   this.addToLocalStorage();
-    // },
-    // saveTodo(val) {
-    //   // console.log(val.index)
-    //   this.$set(this.todoList, val.index, val.todo)
-    //   this.addToLocalStorage();
-    // }
+    }
   }
 };
 </script>

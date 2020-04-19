@@ -22,6 +22,10 @@ export default {
   },
   mounted() {
     this.todoList = JSON.parse(this.$localStorage.get("todoList"));
+    if(!this.todoList) {
+      this.todoList = []
+    }
+
     this.todo = this.todoList[this.id];
   },
   methods: {

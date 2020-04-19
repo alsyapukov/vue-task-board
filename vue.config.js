@@ -24,6 +24,9 @@ module.exports = {
         name: path.join('../src/assets/', 'img/[name].[ext]')
       })
   },
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/vue-task-board/'
+    : '/',
   productionSourceMap: true,
   assetsDir: './assets'
 }
